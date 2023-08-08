@@ -55,7 +55,6 @@ class TestLogin:
         tl.clickLoginButton()
         tl.verify_toast_failed_login('Nama Pengguna & Kata Sandi kosong')
 
-    @pytest.mark.smoke
     def test_input_valid_userid_Admin_and_valid_password(self):
         tl = LoginPage(self.driver)
         tl.inputUserId(valid_userid_Admin)
@@ -63,5 +62,6 @@ class TestLogin:
         tl.clickLoginButton()
         dp = DashboardPage(self.driver)
         dp.verify_text_welcome_page('Selamat datang')
+
 
 
