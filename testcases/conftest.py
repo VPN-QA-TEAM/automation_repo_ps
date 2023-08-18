@@ -15,6 +15,6 @@ def setup(request):
     driver.get('https://portalmurid.com')
     request.cls.driver = driver
     yield
-    driver.quit() # test commit
+    driver.quit() # test commit 2
 
 
