@@ -48,3 +48,4 @@ class SideBars(BaseDriver):
     # LOCATORS PROFILE
     SIDE_PROFILE = '//*[@id="root"]/div[1]/div[2]/div[1]/div/ul/div[2]/li'
 
+
