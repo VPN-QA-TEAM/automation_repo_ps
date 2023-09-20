@@ -63,12 +63,10 @@ class TestLogin:
         tl.clickLoginButton()
         dp = DashboardPage(self.driver)
         dp.verify_text_welcome_page('Selamat datang')
-        # ---
+        # ----
 
     """-------------------------------------SCENARIO LOGIN BY TEACHER--------------------------------------------"""
 
 
 
     """-------------------------------------SCENARIO LOGIN BY STUDENT--------------------------------------------"""
-
-
