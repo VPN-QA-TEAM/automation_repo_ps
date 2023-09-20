@@ -7,7 +7,7 @@ class BaseDriver:
     def __init__(self, driver):
         self.driver = driver
 
-    # Sync issues
+    # Sync
     def wait15sec_until_element_is_clickable(self, locator_type_by, web_element):
         wait = WebDriverWait(self.driver, 15)
         element = wait.until(EC.element_to_be_clickable((locator_type_by, web_element)))

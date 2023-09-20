@@ -8,27 +8,27 @@ class SideBars(BaseDriver):
         super().__init__(driver)
         self.driver = driver
 
-    '''PENGGUNA/USER'''
-    # LOCATORS PENGGUNA/USER
-    SIDE_PENGGUNA = '//li[@class="menu-item icon-user"]/div/i'
-    SIDE_SUB_TAMBAH_PENGGUNA_BARU = '//div[@class="sidebarWidth4 float-left"]/div/ul/div[6]/div/button[1]'
-    SIDE_SUB_LIST_PENGGUNA = '//div[@class="sidebarWidth4 float-left"]/div/ul/div[6]/div/button[2]'
-    SIDE_SUB_ALOKASI_ELECTIVE_SUBJECT = '//div[@class="sidebarWidth4 float-left"]/div/ul/div[6]/div/button[3]'
+    '''----------------------------------------MENU PENGGUNA/USER------------------------------------------------'''
+    # LOCATORS
+    MENU_PENGGUNA = '//li[@class="menu-item icon-user"]/div/i'
+    SUBMENU_TAMBAH_PENGGUNA_BARU = '//div[@class="sidebarWidth4 float-left"]/div/ul/div[6]/div/button[1]'
+    SUBMENU_LIST_PENGGUNA = '//div[@class="sidebarWidth4 float-left"]/div/ul/div[6]/div/button[2]'
+    SUBMENU_ALOKASI_ELECTIVE_SUBJECT = '//div[@class="sidebarWidth4 float-left"]/div/ul/div[6]/div/button[3]'
 
-    # RETURN-OBJECT PENGGUNA/USER
+    # TEST FUNCTION : OBJECT
     def getMenuPengguna(self):
-        return self.wait15sec_until_element_is_clickable(By.XPATH, self.SIDE_PENGGUNA)
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.MENU_PENGGUNA)
 
     def getSubMenuTambahPengguna(self):
-        return self.wait15sec_until_element_is_clickable(By.XPATH, self.SIDE_SUB_TAMBAH_PENGGUNA_BARU)
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.SUBMENU_TAMBAH_PENGGUNA_BARU)
 
     def getSubMenuListPengguna(self):
-        return self.wait15sec_until_element_is_clickable(By.XPATH, self.SIDE_SUB_LIST_PENGGUNA)
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.SUBMENU_LIST_PENGGUNA)
 
     def getSubMenuAlokasiPelajaranElective(self):
-        return self.wait15sec_until_element_is_clickable(By.XPATH, self.SIDE_SUB_ALOKASI_ELECTIVE_SUBJECT)
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.SUBMENU_ALOKASI_ELECTIVE_SUBJECT)
 
-    # ACTION METHOD PENGGUNA/USER
+    # TEST FUNCTION : ACTION/STEP
     def go_to_TambahPenggunaPage(self):
         self.getMenuPengguna().click()
         self.getSubMenuTambahPengguna().click()
@@ -44,8 +44,9 @@ class SideBars(BaseDriver):
         self.getSubMenuAlokasiPelajaranElective().click()
         time.sleep(0.5)
 
-    '''PROFILE'''
-    # LOCATORS PROFILE
-    SIDE_PROFILE = '//*[@id="root"]/div[1]/div[2]/div[1]/div/ul/div[2]/li'
+    '''-----------------------------------------MENU PROFILE-----------------------------------------------------'''
+    # LOCATORS
+    MENU_PROFILE = '//*[@id="root"]/div[1]/div[2]/div[1]/div/ul/div[2]/li'
+
 
 

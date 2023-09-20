@@ -8,17 +8,17 @@ class DashboardPage(BaseDriver):
         super().__init__(driver)
         self.driver = driver
 
-# Locators / Web Element
+    # LOCATORS
     SELAMAT_DATANG = '//div[@class="pageHeading"]/p/em'
 
-    '''CREATE FUNCTION to RETURN OBJECT'''
-
+    # TEST FUNCTION : OBJECT
     def getWelcomPage_on_Dashboard(self):
         return self.wait15sec_until_element_is_presence(By.XPATH, self.SELAMAT_DATANG).text
 
+    # TEST FUNCTION : ACTION/STEP
 
-    '''CREATE ACTION METHOD'''
 
+    # TEST FUNCTION : VERIFICATION/VALIDATION
     def verify_text_welcome_page(self, input_text_for_assert_in):
         text_dashboard = self.getWelcomPage_on_Dashboard()
         print(text_dashboard)
