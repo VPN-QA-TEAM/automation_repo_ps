@@ -12,7 +12,6 @@ BLANK_INPUT = ""
 
 @pytest.mark.usefixtures("setup")
 class TestLogin:
-
     """-------------------------------------SCENARIO LOGIN BY ADMIN--------------------------------------------"""
     def test_input_invalid_Password(self):
         tl = LoginPage(self.driver)
@@ -67,5 +66,9 @@ class TestLogin:
         # ---
 
     """-------------------------------------SCENARIO LOGIN BY TEACHER--------------------------------------------"""
+
+
+
+    """-------------------------------------SCENARIO LOGIN BY STUDENT--------------------------------------------"""
 
 
