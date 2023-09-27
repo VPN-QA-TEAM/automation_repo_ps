@@ -6,7 +6,6 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 import pytest
 
-
 @pytest.fixture()
 def setup(request):
     options = webdriver.ChromeOptions()
