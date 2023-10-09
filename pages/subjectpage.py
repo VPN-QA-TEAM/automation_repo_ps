@@ -34,11 +34,29 @@ class SubjectPage(BaseDriver):
         time.sleep(0.5)
 
     # LOCATORS - KELAS CARD
-
     def clickKelasButton(self, nama_kelas):
         KELAS_BTN = '//div[.="'+nama_kelas+'"]'      # Locator by XPATH
         KELAS_BTN().click()
         time.sleep(0.5)
+
+    # LOCATORS - KELAS PAGE
+    KELAS_DROPDOWNBTN = '//button[@class="btn workbook-label font-weight-bold dropdown-toggle"]'       # by XPATH
+
+    def namaKelasList (nama_kelas):
+        KELASLIST_BTN = '//a[@class="dropdown-item" and .="'+nama_kelas+'"]'      # by XPATH
+
+    MAPELWAJIB_TITLE= '//span[.="Wajib"]'   # by XPATH
+    MAPELPILIHAN_TOTAL = '//span[.="Wajib"]/ancestor::div[@class="subject-header"]//li[2]'    # by XPATH
+
+    def mapelCard (nama_mapel):
+        MAPELITEM_BTN = '//div[.="'+nama_mapel+'"]/parent::div[@class="subject-card-container col-md-2 col-6 mb-5"]'   # by XPATH
+
+    def mapelCardDropdown (nama_mapel):
+        MAPELDROPDOWN_BTN = '//div[.="'+nama_mapel+'"]/parent::div[@class="subject-card-container col-md-2 col-6 mb-5"]//div[@class="card-elipsis mr-2 dropdown"]'   # by XPATH
+
+    MAPELPILIHAN_TITLE= '//span[.="Pilihan"]'   # by XPATH
+    MAPELPILIHAN_TOTAL = '//span[.="Pilihan"]/ancestor::div[@class="subject-header"]//li[2]'    # by XPATH
+
 
     def threeDotsOnKelas(self, nama_kelas):
         THREEDOTS_BUTTON = '//div[.="'+nama_kelas+'"]/parent::div[@class="card text-center course-card m-0 "]//div[@class="header-icon"]' # by XPATH
