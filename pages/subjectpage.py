@@ -63,4 +63,21 @@ class SubjectPage(BaseDriver):
         THREEDOTS_BUTTON().click()
         time.sleep(0.5)
 
-    
+    # LOCATORS - TAMBAH MATA PELAJARAN
+    ADDMAPEL_BTN = '//button[@type="button" and .="Tambah mata pelajaran"]' # by XPATH
+    ADDMAPEL_MODALTITLE = '//h4[@id="modalLabel" and .="Tambah mata pelajaran"]' # by XPATH
+    NAMAMAPEL_INPUTFIELD = '//label[.="Nama Mata Pelajaran"]/parent::div[@class="form-group row noMar"]//input[@type="text"]' # by XPATH
+    NAMAPENDEK_INPUTFIELD = '//label[.="Nama pendek"]/parent::div[@class="col-6 form-group mr-2 mb-0 pl-0"]//input[@type="text"]' # by XPATH
+    WARNATEMA_BTN = '//div[@class="form-control p-4 da-color-palette"]' # by XPATH
+
+    def chooseColor (nomor_posisi):  # Locator by XPATH
+        COLOR_BTN = '//div[@class="colorDotContainer"]/div['+nomor_posisi+']' 
+
+    def jenisSubjek (tipe_subjek): # Locator by XPATH | tipe_subjek = Wajib/Pilihan
+        JENISSUBJEK_BTN = '//input[@class="curriculum-input"]/ancestor::div/label[.="'+tipe_subjek+'"]' # by XPATH
+
+    def mapelIcon (nomor_posisi):   # Locator by XPATH
+        ICON_BTN = '//label[@class="icon-check"]/ancestor::ul[@class="checking-box"]//li['+nomor_posisi+']'     
+
+    def mabelBackground (nomor_posisi) :     # Locator by XPATH
+        BG_BTN = '//label[@class="images-check"]/ancestor::ul[@class="checking-box"]//li['+nomor_posisi+']'
