@@ -40,12 +40,21 @@ class LoginPage(BaseDriver):
 
     def clickLoginButton(self):
         self.getLoginButton().click()
-        time.sleep(0.5)
+        time.sleep(0.8)
 
     # TEST FUNCTION : VERIFICATION/VALIDATION
     def verify_toast_failed_login(self, input_validation_message):
         validation_msg = self.getToastLogin().text
         time.sleep(0.5)
         assert validation_msg == input_validation_message
+
+    # LOGIN STEP ALL IN ONE
+    def userLogin(self, inputUserId, inputPassword):
+        self.getUserIdField().send_keys(inputUserId)
+        time.sleep(0.2)
+        self.getPasswordField().send_keys(inputPassword)
+        time.sleep(0.2)
+        self.clickLoginButton()
+        time.sleep(0.2) 
 
 

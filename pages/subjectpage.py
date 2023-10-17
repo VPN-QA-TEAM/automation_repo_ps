@@ -11,9 +11,10 @@ class SubjectPage(BaseDriver):
 
 ########################################## LOCATORS ###########################################################################
     
+    SUBJECT_SIDEBARS_BTN = '//li[@class="menu-item icon-pelajaran"]'  # by XPATH
+    SKIPINPUTEMAIL_BTN = '//button[@class="btn btn-skip margin-top"]' # by XPATH
     TITLE_HEADER = '//div/h3'      # by XPATH
-    HIDDENSUBJECT_TOGLE = '//div/input[@id="customSwitch-1"]'     # by XPATH
-    ADDCOURSE_BTN = '//button[.="Tambah Pembelajaran"]'      # by XPATH
+    HIDDENSUBJECT_TOGLE = '//div/input[@id="customSwitch-1"]'     # by XPAT ADDCOURSE_BTN = '//button[.="Tambah Pembelajaran"]'      # by XPATH
 
     #LOCATORS - ADD COURSE MODAL
     MODAL_TITLE = '//h4[@class="modal-title"]'    # by XPATH
@@ -104,3 +105,32 @@ class SubjectPage(BaseDriver):
     SEMESTER2_TOGLE_SWITCH = '//ul[@class="btn-switch mb-0"]/li[2]' # by XPATH
     TAMBAHBAB_BTN = '//button[contains(.,"Tambah Bab")]' # by XPATH
     UNGGAHBUKU_BTN = '//button[.="Unggah buku"]' # by XPATH
+    
+    def babDropDownBtn (self, nama_bab):
+        BAB_DROPDOWN_BTN = '//span[.="'+nama_bab+'"]/ancestor::div[@class="row noMar align-items-center mb-0"]//button[@class="btn btn-link p-2 text-left"]' # by XPATH
+
+    def babAddSubTopickBtn (self, nama_bab):
+        BAB_ADDSUBTOPICK_BTN = '//span[.="'+nama_bab+'"]/ancestor::div[@class="row noMar align-items-center mb-0"]//button[@class="btn btn-link"]' # by XPATH
+
+
+################################################################# ACTION ###########################################################################
+
+    def getSkipEmailBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.SKIPINPUTEMAIL_BTN)
+    
+    def getSubjectSidebarsBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.SUBJECT_SIDEBARS_BTN)
+    
+    def getSubjectTitleHeader(self):
+        return self.wait15sec_until_element_is_presence(By.XPATH, self.TITLE_HEADER)
+    
+
+    def clickSkipEmailBtn(self):
+        self.getSkipEmailBtn().click()
+
+    def clickSubjectSidebarsBtn(self):
+        self.getSubjectSidebarsBtn().click()
+        time.sleep(0.5)
+
+    def verifySubjectPage(self):
+        self.getSubjectTitleHeader().is_displayed()

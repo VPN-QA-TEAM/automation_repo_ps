@@ -27,6 +27,15 @@ BLANK_INPUT = ""
 @pytest.mark.usefixtures("setup")
 class TestLogin:
     """-------------------------------------SCENARIO LOGIN BY ADMIN--------------------------------------------"""
+    def test_admin_login_valid_userid_and_valid_password(self):
+        admin = LoginPage(self.driver)
+        admin.inputUserId(USERID_ADMIN_VALID)
+        admin.inputPassword(VALID_PASSWORD_ADMIN)
+        admin.clickLoginButton()
+        dashboard = DashboardPage(self.driver)
+        dashboard.verify_text_welcome_page('Selamat datang')
+        
+    
     def test_admin_login_invalid_Password(self):
         admin = LoginPage(self.driver)
         admin.inputUserId(USERID_ADMIN_VALID)
@@ -68,14 +77,6 @@ class TestLogin:
         admin.inputPassword(BLANK_INPUT)
         admin.clickLoginButton()
         admin.verify_toast_failed_login('Nama Pengguna & Kata Sandi kosong')
-
-    def test_admin_login_valid_userid_and_valid_password(self):
-        admin = LoginPage(self.driver)
-        admin.inputUserId(USERID_ADMIN_VALID)
-        admin.inputPassword(VALID_PASSWORD_ADMIN)
-        admin.clickLoginButton()
-        dashboard = DashboardPage(self.driver)
-        dashboard.verify_text_welcome_page('Selamat datang')
 
     """-------------------------------------SCENARIO LOGIN BY SUBJECT TEACHER K13-----------------------------------"""
     def test_teacher_MPk13_login_invalid_Password(self):
