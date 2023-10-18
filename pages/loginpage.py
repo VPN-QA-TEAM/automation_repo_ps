@@ -55,6 +55,6 @@ class LoginPage(BaseDriver):
         self.getPasswordField().send_keys(inputPassword)
         time.sleep(0.2)
         self.clickLoginButton()
-        time.sleep(0.2) 
+        time.sleep(0.5)
 
 
