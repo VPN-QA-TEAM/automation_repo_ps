@@ -2,6 +2,7 @@ import time
 
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
+from pages.loginpage import LoginPage
 
 class SubjectPage(BaseDriver):
     def __init__(self, driver):
@@ -14,10 +15,10 @@ class SubjectPage(BaseDriver):
     SUBJECT_SIDEBARS_BTN = '//li[@class="menu-item icon-pelajaran"]'  # by XPATH
     SKIPINPUTEMAIL_BTN = '//button[@class="btn btn-skip margin-top"]'  # by XPATH
     TITLE_HEADER = '//div/h3'      # by XPATH
-    HIDDENSUBJECT_TOGGLE = '//div/input[@id="customSwitch-1"]'     # by XPATH
+    HIDDENSUBJECT_TOGGLE = '//div[@class="custom-control custom-switch"]'     # by XPATH
     ADDCOURSE_BTN = '//button[.="Tambah Pembelajaran"]'      # by XPATH
 
-    #LOCATORS - TAMBAH PEMBELAJARAN MODAL
+    #LOCATORS - TAMBAH & EDIT PEMBELAJARAN MODAL
     MODAL_TITLE = '//h4[@class="modal-title"]'    # by XPATH
     KM_RADIOBTN = '//input[@id="curriculum_type_0"]'    # by XPATH
     K13_RADIOBTN = '//input[@id="curriculum_type_1"]'    # by XPATH
@@ -31,6 +32,7 @@ class SubjectPage(BaseDriver):
     MAPEL_INPUTFIELD = '//input[@name="searchTerm"]'     # by XPATH
     CANCELADDCOURSE_BTN = '//button[@class="btn btn-cancel"]'     # by XPATH
     DONE_TAMBAHPEMBELAJARAN_BTN = '//button[@type="submit"]'     # by XPATH
+
     def clickChooseMapel(self, nama_mapel):
         MAPEL_CHECKBOX = '//div/span[.="'+nama_mapel+'"]'      # Locator by XPATH
         MAPEL_CHECKBOX().click()
@@ -38,6 +40,8 @@ class SubjectPage(BaseDriver):
 
 
     # LOCATORS - KELAS CARD
+
+
     def kelasCard(self, nama_kelas_card):
         KELAS_CARD_BTN = '//div[.="'+nama_kelas_card+'"]/parent::div[@class="card text-center course-card m-0 "]'  # Locator by XPATH
         return KELAS_CARD_BTN
@@ -46,50 +50,62 @@ class SubjectPage(BaseDriver):
     CLOSE_FLOATER_BTN = '//button[@data-action="close"]'
     KELAS_DROPDOWNBTN = '//button[@class="btn workbook-label font-weight-bold dropdown-toggle"]'       # by XPATH
 
-    def namaKelasList (self, nama_kelas):
+    def namaKelasList(self, nama_kelas):
         KELASLIST_BTN = '//a[@class="dropdown-item" and .="'+nama_kelas+'"]'      # by XPATH
         return KELASLIST_BTN
+
     MAPELWAJIB_TITLE = '//span[.="Wajib"]'   # by XPATH
     MAPELPIWAJIB_TOTAL = '//span[.="Wajib"]/ancestor::div[@class="subject-header"]//li[2]'    # by XPATH
 
-    def mapelCard (self, nama_mapel):
+    def mapelCard(self, nama_mapel):
         MAPELITEM_BTN = '//div[.="'+nama_mapel+'"]/parent::div[@class="subject-card-container col-md-2 col-6 mb-5"]'   # by XPATH
 
-    def mapelCardDropdown (self, nama_mapel):
+    def mapelCardDropdown(self, nama_mapel):
         MAPELDROPDOWN_BTN = '//div[.="'+nama_mapel+'"]/parent::div[@class="subject-card-container col-md-2 col-6 mb-5"]//div[@class="card-elipsis mr-2 dropdown"]'   # by XPATH
 
-    def mapelCardDropdownOptionList (self, option_list):  # Option List = Ubah / Hapus
+    def mapelCardDropdownOptionList(self, option_list):  # Option List = Ubah / Hapus
         MAPELDROPDOWN_OPTIONLIST = '//div[@class="p-0 dropdown-menu show"]/button[.="'+option_list+'"]'  # Locators by XPATH
 
     MAPELPILIHAN_TITLE = '//span[.="Pilihan"]'   # by XPATH
     MAPELPILIHAN_TOTAL = '//span[.="Pilihan"]/ancestor::div[@class="subject-header"]//li[2]'    # by XPATH
 
 
-    def threeDotsOnKelas(self, nama_kelas):
-        THREEDOTS_BUTTON = '//div[.="'+nama_kelas+'"]/parent::div[@class="card text-center course-card m-0 "]//div[@class="header-icon"]'  # by XPATH
+    def threeDotsOnKelas(self, nama_pembelajaran):
+        THREEDOTS_BUTTON = '//div[.="'+nama_pembelajaran+'"]/parent::div//div[@class="header-icon"]'  # by XPATH
+        return THREEDOTS_BUTTON
+
+    THREEDOTS_EDIT_OPTION_LIST = '//a[@class="dropdown-item" and .="Ubah" or .="Edit"]'  # by XPATH
+    THREEDOTS_DELETE_OPTION_LIST = '//a[@class="dropdown-item" and .="Hapus" or .="Delete"]'  # by XPATH
+    THREEDOTS_HIDECOURSE_OPTION_LIST = '//a[@class="dropdown-item" and .="Sembunyikan Kursus" or .="Hide Course"]'  # by XPATH
+    THREEDOTS_UNHIDECOURSE_OPTION_LIST = '//a[@class="dropdown-item" and .="Perlihatkan Kursus" or .="Unhide Course"]'  # by XPATH
+
+    DELETECONFIRMATION_YES_BTN = '//button[@class="btn yesDeleteMeeting  "]'  # by XPATH
+    DELETECONFIRMATION_NO_BTN = '//button[@class=" btn noDeleteMeeting  "]'  # by XPATH
+
+    TOAST_SUCCESS_DELETE = '//div[@class="Toastify__toast Toastify__toast--default"]'
 
     # LOCATORS - TAMBAH MATA PELAJARAN
     ADDMAPEL_BTN = '//button[@type="button" and .="Tambah mata pelajaran"]'  # by XPATH
     ADDMAPEL_MODALTITLE = '//h4[@id="modalLabel" and .="Tambah mata pelajaran"]'  # by XPATH
-    NAMAMAPEL_INPUTFIELD = '//label[.="Nama Mata Pelajaran"]/parent::div[@class="form-group row noMar"]//input[@type="text"]' # by XPATH
-    NAMAPENDEK_INPUTFIELD = '//label[.="Nama pendek"]/parent::div[@class="col-6 form-group mr-2 mb-0 pl-0"]//input[@type="text"]' # by XPATH
+    NAMAMAPEL_INPUTFIELD = '//label[.="Nama Mata Pelajaran"]/parent::div[@class="form-group row noMar"]//input[@type="text"]'  # by XPATH
+    NAMAPENDEK_INPUTFIELD = '//label[.="Nama pendek"]/parent::div[@class="col-6 form-group mr-2 mb-0 pl-0"]//input[@type="text"]'  # by XPATH
     WARNATEMA_BTN = '//div[@class="form-control p-4 da-color-palette"]'  # by XPATH
 
-    def chooseColor (self, nomor_posisi):  # Locator by XPATH
-        COLOR_BTN = '//div[@class="colorDotContainer"]/div['+nomor_posisi+']'
+    def chooseColor(self, nomor_posisi):  # Posisi = 1 - 24
+        COLOR_BTN = '//div[@class="colorDotContainer"]/div['+nomor_posisi+']'  # Locator by XPATH
 
-    def jenisSubjek (self, tipe_subjek):  # Locator by XPATH | tipe_subjek = Wajib/Pilihan
+    def jenisSubjek(self, tipe_subjek):  # Locator by XPATH | tipe_subjek = Wajib/Pilihan
         JENISSUBJEK_BTN = '//input[@class="curriculum-input"]/ancestor::div/label[.="'+tipe_subjek+'"]'  # by XPATH
 
-    def mapelIcon (self, nomor_posisi):   # Locator by XPATH
-        ICON_BTN = '//label[@class="icon-check"]/ancestor::ul[@class="checking-box"]//li['+nomor_posisi+']'
+    def mapelIcon(self, nomor_posisi):   # Posisi = 1 - 12
+        ICON_BTN = '//label[@class="icon-check"]/ancestor::ul[@class="checking-box"]//li['+nomor_posisi+']'  # Locator by XPATH
 
-    def mabelBackground (self, nomor_posisi):     # Locator by XPATH
-        BG_BTN = '//label[@class="images-check"]/ancestor::ul[@class="checking-box"]//li['+nomor_posisi+']'
+    def mabelBackground(self, nomor_posisi):     # Posisi = 1 - 12
+        BG_BTN = '//label[@class="images-check"]/ancestor::ul[@class="checking-box"]//li['+nomor_posisi+']'  # Locator by XPATH
 
     TERAPKANPEMBELAJARAN_DROPDOWNBTN = '//div[@class="da-multi-select    form-control subject-multi-select"]'  # by XPATH
 
-    def terapkanPembelajaranListOption (self, nama_kelas):
+    def terapkanPembelajaranListOption(self, nama_kelas):
         TERAPKANPEMBELAJARAN_LIST = '//input[@type="checkbox"]/ancestor::div//span[.="'+nama_kelas+'"]'  # by XPATH
 
     SAVEMAPEL_BTN = '//button[@class="btn btn-lg btn-primary"]'  # by XPATH
@@ -169,6 +185,9 @@ class SubjectPage(BaseDriver):
     def getModalTitle(self):
         return self.wait15sec_until_element_is_presence(By.XPATH, self.MODAL_TITLE)
 
+    def getKurikulumK13Btn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.K13_RADIOBTN)
+
     def getJenjangKelasField(self):
         return self.wait15sec_until_element_is_clickable(By.XPATH, self.JENJANGKELAS_DROPDOWNFIELD)
 
@@ -181,7 +200,51 @@ class SubjectPage(BaseDriver):
     def getDoneTambahPembelajaranBtn(self):
         return self.wait15sec_until_element_is_clickable(By.XPATH, self.DONE_TAMBAHPEMBELAJARAN_BTN)
 
+    ################ Three Dots Actions #################
+    def getThreeDotsBtn(self, nama_pembelajaran):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.threeDotsOnKelas(nama_pembelajaran))
 
+    def getThreeDotsEditOptionBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.THREEDOTS_EDIT_OPTION_LIST)
+
+    def getThreeDotsDeleteOptionBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.THREEDOTS_DELETE_OPTION_LIST)
+
+    def getThreeDotsHideCourseOptionBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.THREEDOTS_HIDECOURSE_OPTION_LIST)
+
+    def getThreeDotsUnhideCourseOptionBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.THREEDOTS_UNHIDECOURSE_OPTION_LIST)
+
+    ########################################################
+
+    def getDeleteConfrimationYesBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.DELETECONFIRMATION_YES_BTN)
+
+    def getDeleteConfrimationNoBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.DELETECONFIRMATION_NO_BTN)
+
+    def getSuccessDeleteToast(self):
+        return self.wait15sec_until_element_is_presence(By.XPATH, self.TOAST_SUCCESS_DELETE)
+
+    def getShowHiddenSubjectToggle(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.HIDDENSUBJECT_TOGGLE)
+
+
+
+
+    def goToSubjectPage(self, inputUserId, inputPassword):
+        login = LoginPage(self.driver)
+        login.userLogin(inputUserId, inputPassword)
+        time.sleep(1.0)
+        self.clickSkipEmailBtn()
+        time.sleep(0.5)
+        self.clickSubjectSidebarsBtn()
+        time.sleep(0.5)
+        self.clickCloseFloaterBtn()
+        time.sleep(0.5)
+        self.verifySubjectPage()
+        time.sleep(0.5)
 
 
     def clickSkipEmailBtn(self):
@@ -216,6 +279,10 @@ class SubjectPage(BaseDriver):
         self.getModalTitle().is_displayed()
         time.sleep(1.0)
 
+    def clickKurikulumK13Btn(self):
+        self.getKurikulumK13Btn().click()
+        time.sleep(0.5)
+
     def clickJenjangKelasField(self):
         self.getJenjangKelasField().click()
         time.sleep(0.5)
@@ -232,3 +299,46 @@ class SubjectPage(BaseDriver):
     def clickDoneTambahPembelajaranBtn(self):
         self.getDoneTambahPembelajaranBtn().click()
         time.sleep(0.5)
+
+    ################ Three Dots Actions #################
+    def clickThreeDotsOnKelas(self, nama_pembelajaran):
+        self.getThreeDotsBtn(nama_pembelajaran).click()
+        time.sleep(0.5)
+
+    def clickThreeDotsEditBtn(self):
+        self.getThreeDotsEditOptionBtn().click()
+        time.sleep(0.5)
+
+    def clickThreeDotsDeleteBtn(self):
+        self.getThreeDotsDeleteOptionBtn().click()
+        time.sleep(0.5)
+
+    def clickThreeDotsHideCourseBtn(self):
+        self.getThreeDotsHideCourseOptionBtn().click()
+        time.sleep(0.5)
+
+    def clickThreeDotsUnhideCourseBtn(self):
+        self.getThreeDotsUnhideCourseOptionBtn().click()
+        time.sleep(0.5)
+
+    ########################################################
+
+    def clickDeleteConfirmationYesBtn(self):
+        self.getDeleteConfrimationYesBtn().click()
+        time.sleep(0.3)
+
+    def clickDeleteConfirmationNoBtn(self):
+        self.getDeleteConfrimationNoBtn().click()
+        time.sleep(0.5)
+
+    def verifySuccessDelete(self):
+        self.getSuccessDeleteToast().is_displayed()
+        time.sleep(0.5)
+
+    def clickShowHiddenSubjectToggle(self):
+        self.getShowHiddenSubjectToggle().click()
+        time.sleep(0.5)
+
+    def verifyAddNewKelas(self, nama_kelas_card):
+        self.getKelasCard(nama_kelas_card).is_displayed()
+
