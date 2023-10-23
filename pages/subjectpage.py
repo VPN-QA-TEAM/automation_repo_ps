@@ -1,8 +1,10 @@
 import time
 
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
 from pages.loginpage import LoginPage
+
 
 class SubjectPage(BaseDriver):
     def __init__(self, driver):
@@ -59,12 +61,15 @@ class SubjectPage(BaseDriver):
 
     def mapelCard(self, nama_mapel):
         MAPELITEM_BTN = '//div[.="'+nama_mapel+'"]/parent::div[@class="subject-card-container col-md-2 col-6 mb-5"]'   # by XPATH
+        return MAPELITEM_BTN
 
     def mapelCardDropdown(self, nama_mapel):
         MAPELDROPDOWN_BTN = '//div[.="'+nama_mapel+'"]/parent::div[@class="subject-card-container col-md-2 col-6 mb-5"]//div[@class="card-elipsis mr-2 dropdown"]'   # by XPATH
+        return MAPELDROPDOWN_BTN
 
     def mapelCardDropdownOptionList(self, option_list):  # Option List = Ubah / Hapus
         MAPELDROPDOWN_OPTIONLIST = '//div[@class="p-0 dropdown-menu show"]/button[.="'+option_list+'"]'  # Locators by XPATH
+        return MAPELDROPDOWN_OPTIONLIST
 
     MAPELPILIHAN_TITLE = '//span[.="Pilihan"]'   # by XPATH
     MAPELPILIHAN_TOTAL = '//span[.="Pilihan"]/ancestor::div[@class="subject-header"]//li[2]'    # by XPATH
@@ -92,43 +97,62 @@ class SubjectPage(BaseDriver):
     WARNATEMA_BTN = '//div[@class="form-control p-4 da-color-palette"]'  # by XPATH
 
     def chooseColor(self, nomor_posisi):  # Posisi = 1 - 24
-        COLOR_BTN = '//div[@class="colorDotContainer"]/div['+nomor_posisi+']'  # Locator by XPATH
+        COLOR_BTN = '//div[@class="colorDotContainer "]/div['+nomor_posisi+']/div[@class="colorDot"]'  # Locator by XPATH
+        return COLOR_BTN
 
     def jenisSubjek(self, tipe_subjek):  # Locator by XPATH | tipe_subjek = Wajib/Pilihan
-        JENISSUBJEK_BTN = '//input[@class="curriculum-input"]/ancestor::div/label[.="'+tipe_subjek+'"]'  # by XPATH
+        JENIS_SUBJEK_BTN = '//input[@class="curriculum-input"]/ancestor::div/label[.="'+tipe_subjek+'"]'  # by XPATH
+        return JENIS_SUBJEK_BTN
 
     def mapelIcon(self, nomor_posisi):   # Posisi = 1 - 12
         ICON_BTN = '//label[@class="icon-check"]/ancestor::ul[@class="checking-box"]//li['+nomor_posisi+']'  # Locator by XPATH
+        return ICON_BTN
 
-    def mabelBackground(self, nomor_posisi):     # Posisi = 1 - 12
+    def mapelBackground(self, nomor_posisi):     # Posisi = 1 - 12
         BG_BTN = '//label[@class="images-check"]/ancestor::ul[@class="checking-box"]//li['+nomor_posisi+']'  # Locator by XPATH
+        return BG_BTN
 
     TERAPKANPEMBELAJARAN_DROPDOWNBTN = '//div[@class="da-multi-select    form-control subject-multi-select"]'  # by XPATH
 
     def terapkanPembelajaranListOption(self, nama_kelas):
-        TERAPKANPEMBELAJARAN_LIST = '//input[@type="checkbox"]/ancestor::div//span[.="'+nama_kelas+'"]'  # by XPATH
+        TERAPKAN_PEMBELAJARAN_LIST = '//input[@type="checkbox"]/ancestor::div//span[.="'+nama_kelas+'"]'  # by XPATH
+        return TERAPKAN_PEMBELAJARAN_LIST
 
-    SAVEMAPEL_BTN = '//button[@class="btn btn-lg btn-primary"]'  # by XPATH
-    CANCELADDMAPEL_BTN = '//button[@class="btn btn-lg btn-cancel"]'  # by XPATH
+    def threeDotsOnMapelCard(self, nama_mapel):
+        THREEDOTS_MAPEL_BTN = '//div[@class="subject-name" and .="'+nama_mapel+'"]/parent::div//div[@class="card-elipsis mr-2 dropdown"]'
+        return THREEDOTS_MAPEL_BTN
+
+    def threeDotsListOptionOnMapelCard(self, nama_action):
+        THREEDOTS_LIST_OPTION = '//button[.="'+nama_action+'"]'
+        return THREEDOTS_LIST_OPTION
+
+    EDIT_MAPEL_THREEDOTS_LIST_BTN = '//button[.="Edit" or .="Ubah"]'
+    DELETE_MAPEL_THREEDOTS_LIST_BTN = '//button[.="Delete" or .="Hapus"]'
+
+    SAVE_MAPEL_BTN = '//button[@class="btn btn-lg btn-primary"]'  # by XPATH
+    CANCEL_ADDMAPEL_BTN = '//button[@class="btn btn-lg btn-cancel"]'  # by XPATH
 
 
-    # LOCATORS-MATA PELAJARAN PAGE
+    # LOCATORS - MATA PELAJARAN PAGE
 
     MAPEL_DROPDOWN_BTN = '//span[@id="dropdownMenuLink"]'  # by XPATH
 
-    def mapelDropdownListOptionButton (self, nama_mapel):
+    def mapelDropdownListOptionButton(self, nama_mapel):
         MAPEL_DROPDOWN_LIST_OPTION = '//div[@class="dropdown-menu subject-list show"]//div//span[.="'+nama_mapel+'"]'  # by XPATH
+        return MAPEL_DROPDOWN_LIST_OPTION
 
     SEMESTER1_TOGLE_SWITCH = '//ul[@class="btn-switch mb-0"]/li[1]'  # by XPATH
     SEMESTER2_TOGLE_SWITCH = '//ul[@class="btn-switch mb-0"]/li[2]'  # by XPATH
     TAMBAHBAB_BTN = '//button[contains(.,"Tambah Bab")]'  # by XPATH
     UNGGAHBUKU_BTN = '//button[.="Unggah buku"]'  # by XPATH
 
-    def babDropDownBtn (self, nama_bab):
+    def babDropDownBtn(self, nama_bab):
         BAB_DROPDOWN_BTN = '//span[.="'+nama_bab+'"]/ancestor::div[@class="row noMar align-items-center mb-0"]//button[@class="btn btn-link p-2 text-left"]'  # by XPATH
+        return BAB_DROPDOWN_BTN
 
-    def babAddTopicBtn (self, nama_bab):
-        BAB_ADDTOPIC_BTN = '//span[.="'+nama_bab+'"]/ancestor::div[@class="row noMar align-items-center mb-0"]//button[@class="btn btn-link"]' # by XPATH
+    def babAddTopicBtn(self, nama_bab):
+        BAB_ADDTOPIC_BTN = '//span[.="'+nama_bab+'"]/ancestor::div[@class="row noMar align-items-center mb-0"]//button[@class="btn btn-link"]'  # by XPATH
+        return BAB_ADDTOPIC_BTN
 
 
     # LOCATORS - TAMBAH BAB MODAL
@@ -136,8 +160,10 @@ class SubjectPage(BaseDriver):
     NOMORBAB_FIELD = '//input[@name="chapter_number"]'  # by XPATH
     NAMABAB_FIELD = '//input[@name="chapter_name"]'  # by XPATH
     SEMESTER_DROPDOWN_FIELD = '//select[@name="semester"]'  # by XPATH
-    def semesterDropdownListOption (self, semester):  # SEMESTER = 1 / 2
+
+    def semesterDropdownListOption(self, semester):  # SEMESTER = 1 / 2
         SEMESTER_DROPDOWN_LIST_OPTION = '//select[@name="semester"]//option[@value="'+semester+'"]'
+        return SEMESTER_DROPDOWN_LIST_OPTION
 
     TIDAKTERBITKAN_TOGGLE_SWITCH = '//label[@class="toggle-switch"]'  # Default = Terbitkan. Click Once for Tidak Terbitkan
     BATAL_TAMBAHBAB_BTN = '//button[@class="btn btn-lg btn-cancel"]'  # # by XPATH
@@ -147,8 +173,10 @@ class SubjectPage(BaseDriver):
     # LOCATORS - TAMBAH TOPIC MODAL
 
     INDENTASI_DROPDOWN_FIELD = '//select[@id="topic-indent"]'  # by XPATH
-    def indentasiLevelDropdownListOption (self, indentasi_level):  # Indentasi Level = 1 / 2
+
+    def indentasiLevelDropdownListOption(self, indentasi_level):  # Indentasi Level = 1 / 2
         INDENTASI_DROPDOWN_LIST_OPTION = '//select[@id="topic-indent"]/parent::div[@class="col"]//option[@value="'+indentasi_level+'"]'  # by XPATH
+        return INDENTASI_DROPDOWN_LIST_OPTION
 
     INDENTASI1_FIELD = '//input[@name="indent1"]'  # by XPATH
     INDENTASI2_FIELD = '//input[@name="indent2"]'  # by XPATH (Only available when choose Indentasi Level 2)
@@ -160,6 +188,7 @@ class SubjectPage(BaseDriver):
 
 
 ################################################################# ACTION ###########################################################################
+
 
     def getSkipEmailBtn(self):
         return self.wait15sec_until_element_is_clickable(By.XPATH, self.SKIPINPUTEMAIL_BTN)
@@ -177,7 +206,7 @@ class SubjectPage(BaseDriver):
         return self.wait15sec_until_element_is_clickable(By.XPATH, self.ADDCOURSE_BTN)
 
     def getKelasCard(self, nama_kelas_card):
-        return self.wait15sec_until_element_is_clickable(By.XPATH, self.kelasCard(nama_kelas_card))
+        return self.wait15sec_until_element_is_presence(By.XPATH, self.kelasCard(nama_kelas_card))
 
     def getKelasTitle(self):
         return self.wait15sec_until_element_is_presence(By.XPATH, self.KELAS_DROPDOWNBTN)
@@ -230,6 +259,53 @@ class SubjectPage(BaseDriver):
     def getShowHiddenSubjectToggle(self):
         return self.wait15sec_until_element_is_clickable(By.XPATH, self.HIDDENSUBJECT_TOGGLE)
 
+    def getAddMapelBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.ADDMAPEL_BTN)
+
+    def getNamaMapelInputField(self):
+        return self.wait15sec_until_element_is_presence(By.XPATH, self.NAMAMAPEL_INPUTFIELD)
+
+    def getNamaPendekMapelInputField(self):
+        return self.wait15sec_until_element_is_presence(By.XPATH, self.NAMAPENDEK_INPUTFIELD)
+
+    def getChooseColorField(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.WARNATEMA_BTN)
+
+    def getColorButton(self, nomor_posisi):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.chooseColor(nomor_posisi))
+
+    def getJeniSubjekRadioBtn(self, tipe_subjek):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.jenisSubjek(tipe_subjek))
+
+    def getMapelIconBtn(self, nomor_posisi):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.mapelIcon(nomor_posisi))
+
+    def getMapelBackgroundBtn(self, nomor_posisi):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.mapelBackground(nomor_posisi))
+
+    def getSaveAddMapelBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.SAVE_MAPEL_BTN)
+
+    def getCancelAddMapelBtn(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.CANCEL_ADDMAPEL_BTN)
+
+    def getMapelCard(self, nama_mapel):
+        return self.wait15sec_until_element_is_presence(By.XPATH, self.mapelCard(nama_mapel))
+
+    def getTerapkanPembelajaranDropdownField(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.TERAPKANPEMBELAJARAN_DROPDOWNBTN)
+
+    def getTerapkanPembelajaranListOptions(self, nama_kelas):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.terapkanPembelajaranListOption(nama_kelas))
+
+    def getThreeDotsOnMapelCard(self, nama_mapel):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.threeDotsOnMapelCard(nama_mapel))
+
+    def getThreedotsEditOptionOnMapelCard(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.EDIT_MAPEL_THREEDOTS_LIST_BTN)
+
+
+
 
 
 
@@ -274,6 +350,7 @@ class SubjectPage(BaseDriver):
         validation_msg = self.getKelasTitle().text
         time.sleep(1.0)
         assert validation_msg == kelas_title
+        time.sleep(1.0)
 
     def verifyTambahPembelajaranModalTitle(self):
         self.getModalTitle().is_displayed()
@@ -342,3 +419,76 @@ class SubjectPage(BaseDriver):
     def verifyAddNewKelas(self, nama_kelas_card):
         self.getKelasCard(nama_kelas_card).is_displayed()
 
+    def clickAddMapelBtn(self):
+        self.getAddMapelBtn().click()
+        time.sleep(0.5)
+
+    def inputNamaMapel(self, nama_mapel):
+        self.getNamaMapelInputField().clear()
+        time.sleep(0.1)
+        self.getNamaMapelInputField().send_keys(nama_mapel)
+        time.sleep(0.5)
+
+    def inputNamaPendekMapel(self, nama_pendek_mapel):
+        self.getNamaPendekMapelInputField().clear()
+        time.sleep(0.1)
+        self.getNamaPendekMapelInputField().send_keys(nama_pendek_mapel)
+        time.sleep(0.5)
+
+    def clickChooseColorField(self):
+        self.getChooseColorField().click()
+        time.sleep(0.5)
+
+    def clickColorBtn(self, nomor_posisi):
+        self.getColorButton(nomor_posisi).click()
+        time.sleep(0.5)
+
+    def clickTipeSubjekRadioBtn(self, tipe_subjek):
+        self.getJeniSubjekRadioBtn(tipe_subjek).click()
+        time.sleep(0.5)
+
+    def clickMapelIconBtn(self, nomor_posisi):
+        self.getMapelIconBtn(nomor_posisi).click()
+        time.sleep(1.0)
+
+    def clickMapelBackgroundBtn(self, nomor_posisi):
+        self.getMapelBackgroundBtn(nomor_posisi).click()
+        time.sleep(0.5)
+
+    def clickSaveAddMapelBtn(self):
+        self.getSaveAddMapelBtn().click()
+        time.sleep(0.5)
+
+    def clickCancelAddMapelBtn(self):
+        self.getCancelAddMapelBtn().click()
+        time.sleep(0.5)
+
+    def verifyAddMapel(self, nama_kelas_card):
+        actions = ActionChains(self.driver)
+        actions.scroll_to_element(self.getMapelCard(nama_kelas_card))
+        time.sleep(0.2)
+        self.getMapelCard(nama_kelas_card).is_displayed()
+        time.sleep(1.0)
+
+    def clickTerapkanPembelajaranField(self):
+        self.getTerapkanPembelajaranDropdownField().click()
+        time.sleep(0.5)
+
+    def clickTerapkanPembelajaranListOptionBtn(self, nama_kelas):
+        self.getTerapkanPembelajaranListOptions(nama_kelas).click()
+        time.sleep(0.5)
+
+    def clickMapelCard(self, nama_kelas_card):
+        actions = ActionChains(self.driver)
+        actions.scroll_to_element(self.getMapelCard(nama_kelas_card))
+        time.sleep(0.2)
+        self.getMapelCard(nama_kelas_card).click()
+        time.sleep(0.5)
+
+    def clickThreeDotsOnMapelCard(self, nama_mapel):
+        self.getThreeDotsOnMapelCard(nama_mapel).click()
+        time.sleep(1.0)
+
+    def clickThreeDotsEditMapelListOption(self):
+        self.getThreedotsEditOptionOnMapelCard().click()
+        time.sleep(0.5)
