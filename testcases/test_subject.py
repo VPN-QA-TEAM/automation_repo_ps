@@ -11,17 +11,19 @@ NAMA_PENDEK_ADD_MAPEL = 'MAT'
 @pytest.mark.usefixtures("setup")
 class TestSubject:
     """-------------------------------------SCENARIO SUBJECT--------------------------------------------"""
-    # def test_create_new_kelas(self):
-    #     subject = SubjectPage(self.driver)
-    #     subject.goToSubjectPage("admin.uat", "password123*")
-    #     subject.clickTambahPembelajaranBtn()
-    #     subject.verifyTambahPembelajaranModalTitle()
-    #     subject.clickKurikulumK13Btn()
-    #     subject.clickJenjangKelasField()
-    #     subject.clickJenjangKelasListOption("7")
-    #     subject.inputNamaPembelajaran(NAMA_PEMBELAJARAN)
-    #     subject.clickDoneTambahPembelajaranBtn()
-    #     subject.verifyAddNewKelas(NAMA_PEMBELAJARAN)
+    ##### SUBJECT PAGE #####
+
+    def test_create_new_kelas(self):
+        subject = SubjectPage(self.driver)
+        subject.goToSubjectPage("admin.uat", "password123*")
+        subject.clickTambahPembelajaranBtn()
+        subject.verifyTambahPembelajaranModalTitle()
+        subject.clickKurikulumK13Btn()
+        subject.clickJenjangKelasField()
+        subject.clickJenjangKelasListOption("7")
+        subject.inputNamaPembelajaran(NAMA_PEMBELAJARAN)
+        subject.clickDoneTambahPembelajaranBtn()
+        subject.verifyAddNewKelas(NAMA_PEMBELAJARAN)
     #
     # def test_edit_kelas_card(self):
     #     subject = SubjectPage(self.driver)
@@ -63,21 +65,23 @@ class TestSubject:
     #     subject.clickDeleteConfirmationYesBtn()
     #     subject.verifySuccessDelete()
 
-    def test_create_mapel_pilihan(self):
-        subject = SubjectPage(self.driver)
-        subject.goToSubjectPage("admin.uat", "password123*")
-        subject.clickKelasCard(NAMA_PEMBELAJARAN)
-        subject.verifyKelasPage(NAMA_PEMBELAJARAN)
-        subject.clickAddMapelBtn()
-        subject.inputNamaMapel(NAMA_ADD_MAPEL)
-        subject.inputNamaPendekMapel(NAMA_PENDEK_ADD_MAPEL)
-        subject.clickChooseColorField()
-        subject.clickColorBtn('18')  # Posisi = 1 - 24
-        subject.clickTipeSubjekRadioBtn('Pilihan')  # Tipe Subjek = Wajib / Pilihan
-        subject.clickMapelIconBtn('6')  # Posisi = 1 - 12
-        subject.clickMapelBackgroundBtn('8')  # Posisi = 1 - 12
-        subject.clickSaveAddMapelBtn()
-        subject.verifyAddMapel(NAMA_ADD_MAPEL)
+    ##### CHOOSE MAPEL PAGE #####
+
+    # def test_create_mapel_pilihan(self):
+    #     subject = SubjectPage(self.driver)
+    #     subject.goToSubjectPage("admin.uat", "password123*")
+    #     subject.clickKelasCard(NAMA_PEMBELAJARAN)
+    #     subject.verifyKelasPage(NAMA_PEMBELAJARAN)
+    #     subject.clickAddMapelBtn()
+    #     subject.inputNamaMapel(NAMA_ADD_MAPEL)
+    #     subject.inputNamaPendekMapel(NAMA_PENDEK_ADD_MAPEL)
+    #     subject.clickChooseColorField()
+    #     subject.clickColorBtn('18')  # Posisi = 1 - 24
+    #     subject.clickTipeSubjekRadioBtn('Pilihan')  # Tipe Subjek = Wajib / Pilihan
+    #     subject.clickMapelIconBtn('6')  # Posisi = 1 - 12
+    #     subject.clickMapelBackgroundBtn('8')  # Posisi = 1 - 12
+    #     subject.clickSaveAddMapelBtn()
+    #     subject.verifyAddMapel(NAMA_ADD_MAPEL)
 
     # def test_create_mapel_wajib(self):
     #     subject = SubjectPage(self.driver)
@@ -119,12 +123,20 @@ class TestSubject:
     #     subject.clickSaveAddMapelBtn()
     #     subject.verifyAddMapel(NAMA_ADD_MAPEL)
 
-    def test_delete_mapel(self):
+    # def test_delete_mapel(self):
+    #     subject = SubjectPage(self.driver)
+    #     subject.goToSubjectPage("admin.uat", "password123*")
+    #     subject.clickKelasCard(NAMA_PEMBELAJARAN)
+    #     subject.verifyKelasPage(NAMA_PEMBELAJARAN)
+    #     subject.clickThreeDotsOnMapelCard(NAMA_ADD_MAPEL)
+    #     subject.clickThreeDotsDeleteMapelListOption()
+    #     subject.clickDeleteConfirmationYesBtn()
+    #     subject.verifySuccessDelete()
+
+    ##### CLASS PAGE #####
+    def test_go_to_mapel_page(self):
         subject = SubjectPage(self.driver)
         subject.goToSubjectPage("admin.uat", "password123*")
         subject.clickKelasCard(NAMA_PEMBELAJARAN)
         subject.verifyKelasPage(NAMA_PEMBELAJARAN)
-        subject.clickThreeDotsOnMapelCard(NAMA_ADD_MAPEL)
-        subject.clickThreeDotsDeleteMapelListOption()
-        subject.clickDeleteConfirmationYesBtn()
-        subject.verifySuccessDelete()
+        subject.clickMapelCard('Bahasa Inggris')
