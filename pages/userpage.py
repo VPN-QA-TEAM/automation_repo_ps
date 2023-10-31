@@ -15,12 +15,13 @@ class UserPage(BaseDriver):
 
     USER_SIDEBARS_BTN = '//li[@class="menu-item icon-user"]'  # by XPATH
     USER_SIDEBARS_ADDUSER_BTN = '//div[.="Tambah Pengguna Baru" or .="Add New User"]'  # by XPATH
+    USER_SIDEBARS_USERPAGE_BTN = '//span[.="Pengguna" or .="Users"]/parent::div[@class="profile-left"]'  # by XPATH
 
     # LOCATORS - ADD USER
 
-    STUDENT_TIPE_PENGGUNA_BTN = '//input[@id="student"]/parent::div[@class="d-flex mgt-custom-radio"]'  # by XPATH
-    TEACHER_TIPE_PENGGUNA_BTN = '//input[@id="teacher"]/parent::div[@class="d-flex custom-control mgt-custom-radio"]'  # by XPATH
-    ADMIN_TIPE_PENGGUNA_BTN = '//input[@id="admin"]/parent::div[@class="d-flex custom-control mgt-custom-radio"]'  # by XPATH
+    STUDENT_ROLE_BTN = '//input[@id="student"]/parent::div[@class="d-flex mgt-custom-radio"]'  # by XPATH
+    TEACHER_ROLE_BTN = '//input[@id="teacher"]/parent::div[@class="d-flex custom-control mgt-custom-radio"]'  # by XPATH
+    ADMIN_ROLE_BTN = '//input[@id="admin"]/parent::div[@class="d-flex custom-control mgt-custom-radio"]'  # by XPATH
     FIRSTNAME_INPUT_FIELD = '//input[@name="firstName"]'  # by XPATH
     LASTNAME_INPUT_FIELD = '//input[@name="lastName"]'  # by XPATH
     USERNAME_INPUT_FIELD = '//input[@name="userName"]'  # by XPATH
@@ -43,6 +44,11 @@ class UserPage(BaseDriver):
     ADDRESS_INPUT_FIELD = '//textarea[@id="textarea-address"]'  # by XPATH
     CITY_INPUT_FIELD = '//input[@name="city"]'  # by XPATH
     POSTALCODE_INPUT_FIELD = '//input[@name="postcode"]'  # by XPATH
+    CANCEL_BTN = '//div[@class="btn ae-button-cancel "]'  # by XPATH
+    CREATE_BTN = '//button[@class="btn btn-primary ae-button-create "]'  # by XPATH
+
+    # LOCATORS - ADD USER (TEACHER & ADMIN)
+
     TEACHERID_INPUT_FIELD = '//input[@name="teacherId"]'  # by XPATH (FOR TEACHER)
     NUPTK_INPUT_FIELD = '//input[@name="nuptk"]'  # by XPATH (FOR TEACHER)
     EMPLOYMENTSTATUS_DROPDOWN_FIELD = '//select[@id="employment-add-edit"]'  # by XPATH (FOR TEACHER)
@@ -52,6 +58,8 @@ class UserPage(BaseDriver):
         return EMPLOYMENTSTATUS_DROPDOWN_LIST_BTN
 
     NIP_INPUT_FIELD = '//input[@name="nip"]'  # by XPATH (FOR TEACHER)
+
+    # LOCATORS - ADD USER (STUDENT)
 
     STUDENTID_INPUT_FIELD = '//input[@name="studentId"]'  # by XPATH (FOR STUDENT)
     NISN_INPUT_FIELD = '//input[@name="nisn"]'  # by XPATH (FOR STUDENT)
@@ -78,3 +86,43 @@ class UserPage(BaseDriver):
     CHILDORDER_INFAMILY_INPUT_FIELD = '//input[@class="ae-updown"]'  # by XPATH (FOR STUDENT) NUMBER 1 - 99
     MOTHERNAME_INPUT_FIELD = '//input[@name="motherName"]'  # by XPATH (FOR STUDENT)
     MOTHEROCCUPATION_INPUT_FIELD = '//input[@name="motherOccupation"]'  # by XPATH (FOR STUDENT)
+    PARENTSMOBILEPHONE_INPUT_FIELD = '//input[@name="parentMobile"]'  # by XPATH (FOR STUDENT)
+    GUARDIANNAME_INPUT_FIELD = '//input[@name="guardianName"]'  # by XPATH (FOR STUDENT)
+    GUARDIANADDRESS_INPUT_FIELD = '//textarea[@name="guardianAddress"]'  # by XPATH (FOR STUDENT)
+    GUARDIANOCCUPATION_INPUT_FIELD = '//input[@name="guardianOccupation"]'  # by XPATH (FOR STUDENT)
+    GUARDIANMOBILEPHONE_INPUT_FIELD = '//input[@name="guardianMobile"]'  # by XPATH (FOR STUDENT)
+
+    # LOCATORS - USERS MANAGEMENT PAGE
+
+    SEARCH_INPUT_FIELD = '//input[@name="searchTemp"]'  # by XPATH
+    CREATENEWUSER_BTN = '//button[@class="btn btn-primary font-weight-medium py-3 mx-2 d-flex align-items-center"]'  # by XPATH
+    CHECKALL_CHECKBOX = '//input[@type="checkbox"]/ancestor::th[1]'  # by XPATH
+
+    def UserCheckbox(self, user_full_name):
+        USER_CHECKBOX = '//span[.="' + user_full_name + '"]/ancestor::td/parent::tr//input[@type="checkbox"]'  # by XPATH
+        return USER_CHECKBOX
+
+    def UserEditBtn(self, user_full_name):
+        USER_EDIT_BTN = '//span[.="'+user_full_name+'"]/ancestor::td/parent::tr//button[.="Ubah" or .="Edit"]'  # by XPATH
+        return USER_EDIT_BTN
+
+    def userThreeDotsBtn(self, user_full_name):
+        USER_THREEDOTS_BTN = '//span[.="'+user_full_name+'"]/ancestor::td/parent::tr//div[@id="dropdownAction"]'  # by XPATH
+        return USER_THREEDOTS_BTN
+
+    # LOCATORS - USERS MANAGEMENT PAGE (STUDENT)
+
+    STUDENT_CATEGORY_NAVBAR = '//a[.="Peserta Didik" or .="Student"]/ancestor::div[@class="nav-item"]'  # by XPATH (FOR STUDENT)
+    SELECTCOURSEFILTER_DROPDOWN_FIELD = '//option[.="Select Course" or .="Pilih Pembelajaran"]/parent::select[@class="select-filter form-control"]'  # by XPATH (FOR STUDENT)
+
+    def courseOptionListBtn(self, course_name):
+        COURSE_DROPDOWN_LIST_BTN = '//option[.="'+course_name+'"]'
+        return COURSE_DROPDOWN_LIST_BTN
+
+    COURSESECTIONFILTER_DROPDOWN_FIELD = '//option[.="Select Section" or .="Pilih Kelas"]/parent::select[@class="select-filter form-control"]'  # by XPATH (FOR STUDENT)
+
+    def sectionClassOptionListBtn(self, class_section):
+        SECTIONCLASS_DROPDOWN_LIST_BTN = '//option[.="'+class_section+'"]'
+        return SECTIONCLASS_DROPDOWN_LIST_BTN
+
+
