@@ -304,6 +304,9 @@ class SubjectPage(BaseDriver):
     def getThreedotsEditOptionOnMapelCard(self):
         return self.wait15sec_until_element_is_clickable(By.XPATH, self.EDIT_MAPEL_THREEDOTS_LIST_BTN)
 
+    def getThreedotsDeleteOptionOnMapelCard(self):
+        return self.wait15sec_until_element_is_clickable(By.XPATH, self.DELETE_MAPEL_THREEDOTS_LIST_BTN)
+
 
 
 
@@ -491,4 +494,8 @@ class SubjectPage(BaseDriver):
 
     def clickThreeDotsEditMapelListOption(self):
         self.getThreedotsEditOptionOnMapelCard().click()
+        time.sleep(0.5)
+
+    def clickThreeDotsDeleteMapelListOption(self):
+        self.getThreedotsDeleteOptionOnMapelCard().click()
         time.sleep(0.5)
